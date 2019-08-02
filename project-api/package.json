@@ -1,0 +1,28 @@
+{
+  "name": "api-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node index.js"
+  },
+  "author": "Álvaro Fernández García",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.0",
+    "express-graphql": "^0.8.0",
+    "graphql": "^14.3.0",
+    "graphql-tools": "^4.0.4",
+    "jwt-simple": "^0.5.6",
+    "merge-graphql-schemas": "^1.5.8",
+    "moment": "^2.24.0",
+    "mongoose": "^5.5.10",
+    "nodemon": "^1.19.0",
+    "password-hash": "^1.2.2"
+  }
+}
