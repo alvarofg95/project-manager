@@ -17,3 +17,28 @@ header {
   font-weight: bold;
   text-align: center;
 }
+
+.container {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.projectsPanel {
+  margin-top: 20px;
+}
+
+.projectItem {
+  border: 1px solid;
+  border-color: #05193e;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.searchToolbar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.searchInput {
+  width: 80%;
+}
