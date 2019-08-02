@@ -1,7 +1,8 @@
 import React from 'react';
+import ProjectsPanel from '../components/ProjectsPanel';
 
 export default () => (
   <div>
-    <span>HOME</span>
+    <ProjectsPanel />
   </div>
 );

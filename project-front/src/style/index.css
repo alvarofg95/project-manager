@@ -13,4 +13,7 @@ code {
 header {
   height: 50px;
   background-color: #05193e;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
 }

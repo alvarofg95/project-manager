@@ -1,3 +1,7 @@
 import React from 'react';
 
-export default () => <header>MENU</header>;
+export default () => (
+  <header>
+    <span>Project Manager</span>
+  </header>
+);
