@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
 /* const db =
   'mongodb://administrador:administrador@contactmongo-mrx2o.mongodb.net/graphql-mongodb-server'; */
 // Connect to MongoDB with Mongoose.
-const db = 'mongodb://localhost:27017/foroJara';
+const db = 'mongodb://localhost:27017/projectManager';
 mongoose
   .connect(db, {
     useCreateIndex: true,

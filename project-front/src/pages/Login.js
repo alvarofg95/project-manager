@@ -66,7 +66,7 @@ class Login extends Component {
   }
 
   openSignInForm() {
-    this.setState({ registerForm: true });
+    this.props.history.push('/sign-up');
   }
 
   onKeyPressed(e) {

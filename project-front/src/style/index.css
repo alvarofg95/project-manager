@@ -23,6 +23,14 @@ header {
   margin: 20px auto;
 }
 
+.usersTable {
+  text-align: center;
+}
+
+.usersTable > table {
+  width: 100%
+}
+
 .projectsPanel {
   margin-top: 20px;
 }
