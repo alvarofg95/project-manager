@@ -9,7 +9,7 @@ import CustomButton from '../components/buttons/CustomButton';
 const mapDispatchToProps = dispatch => {
   return {
     loginUser: ({ userId, nick, email, token }) => {
-      dispatch(reduxActions.loginUser(userId, nick, email, token));
+      dispatch(reduxActions.loginUser(userId, token, nick, email));
     }
   };
 };
@@ -33,8 +33,10 @@ class Login extends Component {
   userLogin() {
     const nick = this.nick.current.input.current.value;
     const password = this.password.current.input.current.value;
+    console.log({ nick, password });
     if (nick && password) {
       postToAPI(LOGIN_QUERY, { nick, password }).then(res => {
+        console.log({ res });
         if (res && res.data && res.data.login) {
           const {
             data: {
@@ -44,11 +46,11 @@ class Login extends Component {
           if (token) {
             this.props.loginUser({
               userId: _id,
-              token,
               nick,
-              email
+              email,
+              token
             });
-            this.setState({ accessToPanel: true });
+            this.props.history.push('/');
           }
         } else {
           this.setState({
@@ -76,7 +78,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log('this.props', this.props);
     return (
       <div>
         <TextInput
@@ -118,6 +119,7 @@ class Login extends Component {
           onClick={this.openSignInForm}
           text="Registrar"
         />
+        {this.state.error ? <p>{this.state.errorMessage}</p> : null}
       </div>
     );
   }

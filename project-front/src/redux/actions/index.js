@@ -25,6 +25,7 @@ const logout = () => {
 };
 
 const loginUser = (userId, token) => {
+  console.log({ userId, token });
   const encondedUserIdString = btoa(userId);
   const encondedTokenString = btoa(token);
   const minutes = 30;
@@ -43,6 +44,7 @@ const loginUser = (userId, token) => {
   } catch (e) {
     console.log(e);
   }
+  console.log('login');
   return dispatch => {
     dispatch({
       type: 'LOGIN',
@@ -69,7 +71,7 @@ const loadAppInfo = cookies => {
       appInfo = {
         ...appInfo,
         token: decodedCookieString,
-        userId: decodedCookieUserIdString,
+        userId: decodedCookieUserIdString
       };
     }
     dispatch({ type: 'LOADED_APP_INFO', payload: appInfo });
