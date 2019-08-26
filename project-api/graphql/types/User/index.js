@@ -4,8 +4,8 @@ export default `
     nick: String!
     email: String!
     token: String!
-    role: String!
-    creationDate: String!
+    role: String
+    creationDate: String
   }
 
   type Query {

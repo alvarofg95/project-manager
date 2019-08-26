@@ -17,17 +17,19 @@ export default {
         Team.find({})
           .populate()
           .exec((err, res) => {
+            console.log({ err, res });
             err ? reject(err) : resolve(res);
           });
       });
     }
   },
   Mutation: {
-    addTeam: (root, { name, users = [] }) => {
+    addTeam: (root, { name, users = [], description }) => {
       return new Promise((resolve, reject) => {
         const newTeam = new Team({
           _id: new mongodb.ObjectId(),
           name,
+          description,
           users,
           numUsers: users.length
         });

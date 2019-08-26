@@ -9,6 +9,7 @@ import Header from './components/Header';
 import SignUp from './pages/SignUp';
 import Users from './pages/Users';
 import Teams from './pages/Teams';
+import NewTeam from './pages/NewTeam.js';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -44,6 +45,7 @@ class App extends Component {
           <Route exact path="/sign-up" component={SignUp} />
           <Route exact path="/users" component={Users} />
           <Route exact path="/teams" component={Teams} />
+          <Route exact path="/new-team" component={NewTeam} />
         </Switch>
       </div>
     );

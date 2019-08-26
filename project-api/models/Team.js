@@ -8,6 +8,9 @@ const TeamSchema = new Schema({
     type: String,
     required: true
   },
+  description: {
+    type: String
+  },
   numUsers: {
     type: Number,
     required: true
