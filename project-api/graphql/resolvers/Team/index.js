@@ -26,12 +26,15 @@ export default {
   Mutation: {
     addTeam: (root, { name, users = [], description }) => {
       return new Promise((resolve, reject) => {
+        const slug = createSlug(name, Team);
+
         const newTeam = new Team({
           _id: new mongodb.ObjectId(),
           name,
           description,
           users,
-          numUsers: users.length
+          numUsers: users.length,
+          slug
         });
         newTeam.save((err, res) => {
           if (err && err.code === 11000) {
@@ -43,7 +46,8 @@ export default {
                 _id: res._id,
                 name: res.name,
                 users: res.users,
-                numUsers: res.email
+                numUsers: res.email,
+                slug: res.slug
               });
         });
       });

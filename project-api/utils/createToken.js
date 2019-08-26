@@ -14,8 +14,8 @@ export const createToken = user => {
   return jwt.encode(payload, process.env.TOKEN_SECRET || 'develop');
 };
 
-export const createSlug = name => {
-  const finalName = name
+export const createSlug = (name, model) => {
+  let finalName = name
     .toLowerCase()
     .replace(/ /g, '-')
     .replace(/ñ/g, 'n')
@@ -24,5 +24,15 @@ export const createSlug = name => {
     .replace(/í/g, 'i')
     .replace(/ó/g, 'o')
     .replace(/ú/g, 'u');
+  let exists = true;
+  do {
+    const count = model.count({ slug: finalName });
+    if (count === 0) {
+      exists = false;
+    } else {
+      finalName = `${finalName}-${count}`;
+    }
+  } while (exists === true);
+
   return finalName;
 };

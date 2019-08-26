@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { truncate } from 'fs';
 
 const Schema = mongoose.Schema;
 
@@ -20,6 +21,10 @@ const TeamSchema = new Schema({
       type: mongoose.Schema.Types.ObjectId
     }
   ],
+  slug: {
+    type: String,
+    required: true
+  },
   creationDate: {
     type: Date,
     default: Date.now
