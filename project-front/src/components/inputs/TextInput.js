@@ -56,7 +56,6 @@ class TextInput extends React.Component {
     if (label) {
       return (
         <div className={`${(divClassName && divClassName) || ''} ${inLine ? 'flex' : ''}`}>
-          <p className={labelClassName}>{label}</p>
           {textArea ? (
             <textarea
               ref={this.input}

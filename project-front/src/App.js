@@ -1,17 +1,12 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
 import Header from './components/Header';
+import RouterControl from './components/router/RouterControl';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-      </Switch>
+      <RouterControl />
     </div>
   );
 }

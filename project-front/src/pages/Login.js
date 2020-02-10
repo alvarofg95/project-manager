@@ -5,6 +5,7 @@ import LOGIN_QUERY from '../queries/login.query';
 import postToAPI from '../utils/postToAPI';
 import TextInput from '../components/inputs/TextInput';
 import CustomButton from '../components/buttons/CustomButton';
+import '../style/login.scss';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -78,51 +79,40 @@ class Login extends Component {
   render() {
     console.log('this.props', this.props);
     return (
-      <div>
+      <div id="loginContainer">
+        <p>Accede a tus proyectos</p>
         <TextInput
           required
           minLength={3}
           divClassName="packLoginDiv"
           labelClassName="loginLabel"
           className="loginInput"
-          label="Nombre de usuario"
+          placeholder="Nombre de usuario"
           onKeyDown={this.onKeyPressed}
           ref={this.nick}
         />
+        <br />
         <TextInput
           required
           minLength={8}
           divClassName="packLoginDiv"
           labelClassName="loginLabel"
           className="loginInput"
-          label="Contraseña"
+          placeholder="Contraseña"
           type="password"
           onKeyDown={this.onKeyPressed}
           ref={this.password}
         />
         <CustomButton
-          className="logInButton"
-          backgroundColor="#4ca540"
-          height={35}
-          fontSize={20}
-          borderRadius="10px"
           onClick={this.userLogin}
           text="Iniciar sesión"
         />
-        <CustomButton
-          className="signInButton"
-          backgroundColor="#2196F3"
-          height={35}
-          fontSize={20}
-          borderRadius="10px"
-          onClick={this.openSignInForm}
-          text="Registrar"
-        />
+        <p>
+          ¿Aún no estás registrado? Accede <span onClick={this.openSignInForm}>aquí</span> para
+          registrarte y poder gestionar tus proyectos
+        </p>
       </div>
     );
   }
 }
-export default connect(
-  null,
-  mapDispatchToProps
-)(Login);
+export default connect(null, mapDispatchToProps)(Login);

@@ -10,17 +10,7 @@ export default ({
   borderRadius,
   border
 }) => (
-  <button
-    onClick={onClick}
-    className={`${(className && className) || ''} defaultBtn`}
-    style={{
-      backgroundColor: backgroundColor,
-      height: height,
-      fontSize: fontSize,
-      borderRadius: borderRadius,
-      border: border === false ? 'none' : ''
-    }}
-  >
+  <button onClick={onClick} className={`${(className && className) || ''} defaultBtn`}>
     {text}
   </button>
 );
