@@ -1,10 +1,12 @@
+@import '../style/variables.scss';
+
 #loginContainer {
   width: 30rem;
   margin: 12rem auto 0rem auto;
   padding: 10px;
   border: 1px solid;
   border-radius: 25px;
-  background-color: #f1e9e9;
+  background-color: $white-background;
 
   p {
     text-align: center;
