@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Cookies from 'universal-cookie';
+import reduxActions from './redux/actions/index';
 import Header from './components/Header';
 import RouterControl from './components/router/RouterControl';
 
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <RouterControl />
-    </div>
-  );
+const mapDispatchToProps = dispatch => ({
+  loadAppInfo: cookies => {
+    dispatch(reduxActions.loadAppInfo(cookies));
+  }
+});
+class App extends Component {
+  cookies = null;
+  componentDidMount() {
+    if (!this.cookies) {
+      this.cookies = new Cookies();
+    }
+    this.props.loadAppInfo(this.cookies);
+    const { token } = this.props;
+    console.log({ props: this.props });
+    if (!token) {
+      const { history } = this.props;
+      if (history) {
+        history.push('/login');
+      }
+    }
+    console.log({ token });
+  }
+
+  render() {
+    console.log({ render: this.props });
+    return (
+      <div className="App">
+        <Header />
+        <RouterControl />
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  token: state && state.token
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

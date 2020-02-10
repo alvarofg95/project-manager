@@ -7,13 +7,11 @@ import TextInput from '../components/inputs/TextInput';
 import CustomButton from '../components/buttons/CustomButton';
 import '../style/login.scss';
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loginUser: ({ userId, nick, email, token }) => {
-      dispatch(reduxActions.loginUser(userId, nick, email, token));
-    }
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  loginUser: ({ userId, nick, email, token }) => {
+    dispatch(reduxActions.loginUser(userId, nick, email, token));
+  }
+});
 
 class Login extends Component {
   constructor(props) {
@@ -77,7 +75,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log('this.props', this.props);
     return (
       <div id="loginContainer">
         <p>Accede a tus proyectos</p>
@@ -103,10 +100,7 @@ class Login extends Component {
           onKeyDown={this.onKeyPressed}
           ref={this.password}
         />
-        <CustomButton
-          onClick={this.userLogin}
-          text="Iniciar sesión"
-        />
+        <CustomButton onClick={this.userLogin} text="Iniciar sesión" />
         <p>
           ¿Aún no estás registrado? Accede <span onClick={this.openSignInForm}>aquí</span> para
           registrarte y poder gestionar tus proyectos
