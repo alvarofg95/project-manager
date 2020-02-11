@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import reduxActions from './redux/actions/index';
 import Header from './components/Header';
@@ -12,7 +13,8 @@ const mapDispatchToProps = dispatch => ({
 });
 class App extends Component {
   cookies = null;
-  componentDidMount() {
+
+  componentWillMount() {
     if (!this.cookies) {
       this.cookies = new Cookies();
     }
@@ -29,7 +31,6 @@ class App extends Component {
   }
 
   render() {
-    console.log({ render: this.props });
     return (
       <div className="App">
         <Header />
@@ -43,4 +44,4 @@ const mapStateToProps = state => ({
   token: state && state.token
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

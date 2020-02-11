@@ -6,8 +6,8 @@ const array = [1, 2, 3, 4, 5];
 
 export default () => (
   <div id="projectsContainer">
-    {array.map(() => (
-      <ProjectItem />
+    {array.map((key, index) => (
+      <ProjectItem key={`key${index}`} />
     ))}
   </div>
 );
