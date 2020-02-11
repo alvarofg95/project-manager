@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import reduxActions from '../redux/actions/index';
 import LOGIN_QUERY from '../queries/login.query';
 import postToAPI from '../utils/postToAPI';
@@ -23,13 +24,9 @@ class Login extends Component {
 
     this.nick = React.createRef();
     this.password = React.createRef();
-
-    this.userLogin = this.userLogin.bind(this);
-    this.openSignInForm = this.openSignInForm.bind(this);
-    this.onKeyPressed = this.onKeyPressed.bind(this);
   }
 
-  userLogin() {
+  userLogin = () => {
     const nick = this.nick.current.input.current.value;
     const password = this.password.current.input.current.value;
     if (nick && password) {
@@ -62,17 +59,20 @@ class Login extends Component {
         errorMessage: 'El nick y la contraseña son campos obligatorios'
       });
     }
-  }
+  };
 
-  openSignInForm() {
-    this.setState({ registerForm: true });
-  }
+  openSignInForm = () => {
+    const { history } = this.props;
+    if (history) {
+      history.push('/sign-up');
+    }
+  };
 
-  onKeyPressed(e) {
+  onKeyPressed = e => {
     if (e.keyCode === 13 && e.shiftKey === false) {
       this.userLogin();
     }
-  }
+  };
 
   render() {
     return (
@@ -109,4 +109,4 @@ class Login extends Component {
     );
   }
 }
-export default connect(null, mapDispatchToProps)(Login);
+export default withRouter(connect(null, mapDispatchToProps)(Login));

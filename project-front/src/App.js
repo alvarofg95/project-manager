@@ -11,6 +11,17 @@ const mapDispatchToProps = dispatch => ({
     dispatch(reduxActions.loadAppInfo(cookies));
   }
 });
+
+const mustRedirect = pathname => {
+  switch (pathname) {
+    case '/sign-up':
+    case '/login':
+      return false;
+    default:
+      return true;
+  }
+};
+
 class App extends Component {
   cookies = null;
 
@@ -22,8 +33,8 @@ class App extends Component {
     const { token } = this.props;
     console.log({ props: this.props });
     if (!token) {
-      const { history } = this.props;
-      if (history) {
+      const { history, location } = this.props;
+      if (history && location && location.pathname && mustRedirect(location.pathname)) {
         history.push('/login');
       }
     }

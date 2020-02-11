@@ -21,15 +21,33 @@
   }
 
   input {
-    width: 90%;
+    width: 27.7rem;
     padding: 18px;
     font-size: 18px;
     border-radius: 11px;
     border: none;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    background-color: $white;
+
+    &.error {
+      margin-bottom: 0px;
+    }
   }
 
-  input:focus {
+  input:disabled {
+    background-color: $white;
+    cursor: no-drop;
+  }
+
+  .errorLabel {
+    color: $error-label;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  input:focus,
+  button:focus {
     outline: none;
   }
 
@@ -41,7 +59,8 @@
     font-size: 20px;
     width: 10rem;
     display: grid;
-    margin: 0 auto;
+    margin: 1rem auto 0px auto;
+    cursor: pointer;
   }
 
 }
