@@ -1,7 +1,13 @@
 import React from 'react';
+import '../style/header.scss';
 
-export default () => (
+export default ({ logout }) => (
   <header>
-    <span>Project Manager</span>
+    <img
+      onClick={logout}
+      className="logout"
+      title="Cerrar sesión"
+      src={require('../assets/icons/logout.svg')}
+    />
   </header>
 );

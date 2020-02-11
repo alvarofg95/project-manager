@@ -1,15 +1,8 @@
 let cookiesService = null;
 
 const logout = () => {
-  const minutes = 30;
-  let cookieExpirationTime = new Date('01/01/2000');
-  cookieExpirationTime.setTime(cookieExpirationTime.getTime() + 1000 * 60 * minutes);
-
   try {
-    cookiesService.set('tokenInfo', '', {
-      path: '/',
-      expires: cookieExpirationTime
-    });
+    localStorage.user = null;
   } catch (e) {
     console.log(e);
   }

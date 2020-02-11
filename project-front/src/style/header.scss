@@ -1,0 +1,13 @@
+@import '../style/variables.scss';
+
+header {
+  height: 4rem;
+  display: flex;
+  justify-content: flex-end;
+
+  .logout {
+    width: 2.5rem;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+}

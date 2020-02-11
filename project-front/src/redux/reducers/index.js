@@ -18,7 +18,7 @@ const rootReducer = (state, action = '') => {
       return initialState;
     case 'LOADED_APP_INFO':
       console.log({ payload: action.payload });
-      return Object.assign({}, state, action.payload);
+      return Object.assign({}, state, { ...action.payload });
     default:
       break;
   }
