@@ -112,8 +112,10 @@ class SignUp extends Component {
           onChange={this.handleInput}
           onKeyDown={this.onKeyPressed}
         />
-        <CustomButton disabled={disabled} onClick={this.userSignUp} text="Registrarme" />
-        <CustomButton onClick={this.goBack} text="Volver" />
+        <div className="buttonContainer">
+          <CustomButton disabled={disabled} onClick={this.userSignUp} text="Registrarme" />
+          <CustomButton className="backButton" onClick={this.goBack} text="Volver" />
+        </div>
       </div>
     );
   }

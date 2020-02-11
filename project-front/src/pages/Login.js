@@ -15,20 +15,15 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: false,
-      errorMessage: null
-    };
-
-    this.nick = React.createRef();
-    this.password = React.createRef();
-  }
-
+  state = {
+    error: false,
+    errorMessage: null,
+    nick: null,
+    password: null,
+    disabled: true
+  };
   userLogin = () => {
-    const nick = this.nick.current.input.current.value;
-    const password = this.password.current.input.current.value;
+    const { nick, password } = this.state;
     if (nick && password) {
       postToAPI(LOGIN_QUERY, { nick, password }).then(res => {
         if (res && res.data && res.data.login) {
@@ -74,33 +69,48 @@ class Login extends Component {
     }
   };
 
+  handleInput = ({ target: { name, value } }) => {
+    this.setState(prevState => {
+      prevState[name] = value;
+      if (prevState.nick && prevState.password) {
+        prevState.disabled = false;
+      }
+      return { ...prevState };
+    });
+  };
+
   render() {
+    const { disabled } = this.state;
     return (
       <div id="loginContainer">
         <p>Accede a tus proyectos</p>
         <TextInput
           required
+          name="nick"
           minLength={3}
           divClassName="packLoginDiv"
           labelClassName="loginLabel"
           className="loginInput"
           placeholder="Nombre de usuario"
+          onChange={this.handleInput}
           onKeyDown={this.onKeyPressed}
           ref={this.nick}
         />
         <br />
         <TextInput
           required
+          name="password"
           minLength={8}
           divClassName="packLoginDiv"
           labelClassName="loginLabel"
           className="loginInput"
           placeholder="Contraseña"
           type="password"
+          onChange={this.handleInput}
           onKeyDown={this.onKeyPressed}
           ref={this.password}
         />
-        <CustomButton onClick={this.userLogin} text="Iniciar sesión" />
+        <CustomButton disabled={disabled} onClick={this.userLogin} text="Iniciar sesión" />
         <p>
           ¿Aún no estás registrado? Accede <span onClick={this.openSignInForm}>aquí</span> para
           registrarte y poder gestionar tus proyectos
