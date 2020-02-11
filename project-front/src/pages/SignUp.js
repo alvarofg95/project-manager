@@ -4,10 +4,12 @@ import reduxActions from '../redux/actions/index';
 import TextInput from '../components/inputs/TextInput';
 import CustomButton from '../components/buttons/CustomButton';
 import '../style/login.scss';
+import postToAPI from '../utils/postToAPI';
+import { ADD_USER_MUTATION } from '../apiData/mutations';
 
 const mapDispatchToProps = dispatch => ({
   loginUser: ({ userId, nick, email, token }) => {
-    dispatch(reduxActions.loginUser(userId, nick, email, token));
+    dispatch(reduxActions.loginUser({ userId, nick, email, token }));
   }
 });
 
@@ -33,6 +35,25 @@ class SignUp extends Component {
     const { nick, email, password } = this.state;
     console.log({ nick, email, password });
     if (nick && password && email) {
+      postToAPI(ADD_USER_MUTATION, { nick, email, password }).then(res => {
+        console.log({ res });
+        if (res && res.data && res.data.addUser) {
+          const {
+            data: {
+              addUser: { _id, token }
+            }
+          } = res;
+          if (token) {
+            this.props.loginUser({
+              userId: _id,
+              token,
+              nick,
+              email
+            });
+            this.setState({ accessToPanel: true });
+          }
+        }
+      });
     } else {
       this.setState({
         error: true,

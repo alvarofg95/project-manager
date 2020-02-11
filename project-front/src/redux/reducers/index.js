@@ -1,6 +1,7 @@
 const initialState = {
   token: null,
-  userId: null
+  nick: null,
+  email: null
 };
 
 const update = (state, payload = {}) => {
@@ -16,7 +17,8 @@ const rootReducer = (state, action = '') => {
     case 'LOGOUT':
       return initialState;
     case 'LOADED_APP_INFO':
-      return Object.assign({}, state, action.payload, { loadedAppInfo: true });
+      console.log({ payload: action.payload });
+      return Object.assign({}, state, action.payload);
     default:
       break;
   }

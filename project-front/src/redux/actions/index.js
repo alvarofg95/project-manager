@@ -6,10 +6,6 @@ const logout = () => {
   cookieExpirationTime.setTime(cookieExpirationTime.getTime() + 1000 * 60 * minutes);
 
   try {
-    cookiesService.set('userIdInfo', '', {
-      path: '/',
-      expires: cookieExpirationTime
-    });
     cookiesService.set('tokenInfo', '', {
       path: '/',
       expires: cookieExpirationTime
@@ -24,22 +20,10 @@ const logout = () => {
   };
 };
 
-const loginUser = (userId, token) => {
-  const encondedUserIdString = btoa(userId);
-  const encondedTokenString = btoa(token);
-  const minutes = 30;
-  let cookieExpirationTime = new Date();
-  cookieExpirationTime.setTime(cookieExpirationTime.getTime() + 1000 * 60 * minutes);
-
+const loginUser = ({ nick, email, token }) => {
+  const tokenInfo = JSON.stringify({ token, nick, email });
   try {
-    cookiesService.set('userIdInfo', encondedUserIdString, {
-      path: '/',
-      expires: cookieExpirationTime
-    });
-    cookiesService.set('tokenInfo', encondedTokenString, {
-      path: '/',
-      expires: cookieExpirationTime
-    });
+    localStorage.user = tokenInfo;
   } catch (e) {
     console.log(e);
   }
@@ -47,32 +31,22 @@ const loginUser = (userId, token) => {
     dispatch({
       type: 'LOGIN',
       payload: {
-        token
+        token,
+        nick,
+        email
       }
     });
   };
 };
 
-const loadAppInfo = cookies => {
+const loadAppInfo = () => {
   return dispatch => {
-    if (!cookiesService) {
-      cookiesService = cookies;
+    const appInfo = {};
+    if (localStorage.user) {
+      appInfo.token = JSON.parse(localStorage.user);
     }
-    const encondedTokenString = cookiesService.get('tokenInfo');
-    const encondedUserIdString = cookiesService.get('userIdInfo');
-    let decodedCookieString = '';
-    let decodedCookieUserIdString = '';
-    let appInfo = {};
-    if (encondedTokenString && encondedUserIdString) {
-      decodedCookieString = atob(encondedTokenString);
-      decodedCookieUserIdString = atob(encondedUserIdString);
-      appInfo = {
-        ...appInfo,
-        token: decodedCookieString,
-        userId: decodedCookieUserIdString,
-      };
-    }
-    dispatch({ type: 'LOADED_APP_INFO', payload: appInfo });
+
+    dispatch({ type: 'LOADED_APP_INFO', payload: { ...appInfo } });
   };
 };
 

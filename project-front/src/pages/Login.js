@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import reduxActions from '../redux/actions/index';
-import LOGIN_QUERY from '../queries/login.query';
+import { LOGIN_QUERY } from '../apiData/queries';
 import postToAPI from '../utils/postToAPI';
 import TextInput from '../components/inputs/TextInput';
 import CustomButton from '../components/buttons/CustomButton';
 import '../style/login.scss';
+import ErrorToast from '../components/errors/ErrorToast';
 
 const mapDispatchToProps = dispatch => ({
   loginUser: ({ userId, nick, email, token }) => {
-    dispatch(reduxActions.loginUser(userId, nick, email, token));
+    dispatch(reduxActions.loginUser({ userId, nick, email, token }));
   }
 });
 
@@ -33,15 +34,17 @@ class Login extends Component {
             }
           } = res;
           if (token) {
-            this.props.loginUser({
+            const { loginUser, history } = this.props;
+            loginUser({
               userId: _id,
               token,
               nick,
               email
             });
-            this.setState({ accessToPanel: true });
+            history.push('/');
           }
         } else {
+          console.log('else');
           this.setState({
             error: true,
             errorMessage: 'No existe un usuario con esas credenciales'
@@ -80,7 +83,7 @@ class Login extends Component {
   };
 
   render() {
-    const { disabled } = this.state;
+    const { disabled, errorMessage, error } = this.state;
     return (
       <div id="loginContainer">
         <p>Accede a tus proyectos</p>
@@ -111,6 +114,7 @@ class Login extends Component {
           ref={this.password}
         />
         <CustomButton disabled={disabled} onClick={this.userLogin} text="Iniciar sesión" />
+        {error ? <ErrorToast message={errorMessage} /> : null}
         <p>
           ¿Aún no estás registrado? Accede <span onClick={this.openSignInForm}>aquí</span> para
           registrarte y poder gestionar tus proyectos

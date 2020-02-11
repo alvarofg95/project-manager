@@ -23,28 +23,28 @@ const mustRedirect = pathname => {
 };
 
 class App extends Component {
-  cookies = null;
-
+  state = {
+    logged: false
+  };
   componentWillMount() {
-    if (!this.cookies) {
-      this.cookies = new Cookies();
-    }
-    this.props.loadAppInfo(this.cookies);
-    const { token } = this.props;
-    console.log({ props: this.props });
-    if (!token) {
+    const { loadAppInfo } = this.props;
+    loadAppInfo();
+    const user = localStorage.user && JSON.parse(localStorage.user);
+    if (!user || (user && !user.token)) {
       const { history, location } = this.props;
       if (history && location && location.pathname && mustRedirect(location.pathname)) {
         history.push('/login');
       }
+    } else {
+      this.setState({ logged: true });
     }
-    console.log({ token });
   }
 
   render() {
+    const { logged } = this.state;
     return (
       <div className="App">
-        <Header />
+        {logged ? <Header /> : null}
         <RouterControl />
       </div>
     );

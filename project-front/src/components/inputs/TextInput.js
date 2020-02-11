@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Validator from '../../utils/validator';
+import { validate } from '../../utils/validator';
 
 class TextInput extends React.Component {
   constructor(props) {
@@ -13,8 +13,7 @@ class TextInput extends React.Component {
 
   validate = () => {
     const { minLength, sameAs } = this.props;
-    const error = Validator.validate(this.input, { minLength, sameAs });
-    console.log({ error });
+    const error = validate(this.input, { minLength, sameAs });
     this.setState({ ...error });
   };
 
@@ -25,9 +24,7 @@ class TextInput extends React.Component {
       onChange,
       disabled,
       className,
-      divClassName,
       required,
-      inLine,
       textArea,
       rows,
       onKeyDown,

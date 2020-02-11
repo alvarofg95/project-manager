@@ -1,4 +1,4 @@
-const validate = (input, props) => {
+export const validate = (input, props) => {
   let response = {
     error: false,
     errorMessage: null
@@ -25,8 +25,4 @@ const validate = (input, props) => {
     };
   }
   return response;
-};
-
-export default {
-  validate
 };
