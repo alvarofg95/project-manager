@@ -1,6 +1,6 @@
 import React from 'react';
 import ProjectItem from './ProjectItem';
-import '../style/projects.scss';
+import '../../style/projects.scss';
 
 const array = [1, 2, 3, 4, 5];
 
