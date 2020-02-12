@@ -31,7 +31,16 @@ class App extends Component {
   };
 
   componentDidUpdate(nextProps) {
-    if (nextProps.token && !this.props.token) {
+    const { token, history } = nextProps;
+    const { token: oldToken } = this.props;
+    const { logged } = this.state;
+    if (token && !oldToken) {
+      this.setState({ logged: true });
+      history.push('/');
+    } else if (logged && !oldToken) {
+      this.setState({ logged: false });
+      history.push('/login');
+    } else if (oldToken && !logged) {
       this.setState({ logged: true });
     }
   }
@@ -69,7 +78,6 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log({ state });
   return {
     token: state && state.token
   };

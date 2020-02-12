@@ -34,9 +34,9 @@ const loginUser = ({ nick, email, token }) => {
 
 const loadAppInfo = () => {
   return dispatch => {
-    const appInfo = {};
+    let appInfo = {};
     if (localStorage.user) {
-      appInfo.token = JSON.parse(localStorage.user);
+      appInfo = JSON.parse(localStorage.user);
     }
 
     dispatch({ type: 'LOADED_APP_INFO', payload: { ...appInfo } });
